@@ -26,6 +26,10 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'telegram' => [
+            'class' => 'app\components\TelegramComponent',
+            'bot_token' => $params['telegramApiToken'],
+        ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set
