@@ -3,6 +3,8 @@
 namespace app\components;
 
 use app\components\Types\Message;
+use app\models\TelegramChat;
+use app\models\TelegramContentMessage;
 use yii\helpers\VarDumper;
 use Yii;
 
@@ -26,25 +28,25 @@ class Parser {
 
     public function parse() {
         //если сообщение из приватного чата
-        if ($this->isPrivate() && $this->isAuthenticated()) {
-            //если в сообщении есть команда, то парсим ее
-            if (isset($this->message->entities) && $this->message->entities->type == 'bot_command') {
-                return $this->parseCommand();
-            } else {
-                if (!$this->parseTextCommand() && !$this->parseByLastContent()) {
-                    $buttons = [[self::MESSAGE_SIGN_FOR_LAB]];
-                    $keyboard = Yii::$app->telegram->buildKeyBoard($buttons);
-                    $content = [
-                        'chat_id' => $this->message->chat->id,
-                        'text' => 'Неизвестная команда',
-                        'reply_markup' => $keyboard,
-                    ];
-                    Yii::$app->telegram->sendMessage($content);
-                    //тут будет парсер контекста
-                }
-            }
-        }
+//        if ($this->isPrivate() && $this->isAuthenticated()) {
+//            //если в сообщении есть команда, то парсим ее
+//            if (isset($this->message->entities) && $this->message->entities->type == 'bot_command') {
+//                return $this->parseCommand();
+//            } else {
+//                if (!$this->parseTextCommand() && !$this->parseByLastContent()) {
+        $buttons = [[self::MESSAGE_SIGN_FOR_LAB]];
+        $keyboard = Yii::$app->telegram->buildKeyBoard($buttons);
+        $content = [
+            'chat_id' => $this->message->chat->id,
+            'text' => 'Неизвестная команда',
+            'reply_markup' => $keyboard,
+        ];
+        Yii::$app->telegram->sendMessage($content);
+        //тут будет парсер контекста
     }
+//            }
+//        }
+//    }
 
     public function parseCommand() {
         $command = $this->getCommand();

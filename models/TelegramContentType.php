@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use app\modules\Telegram\components\TelegramComponent;
+use app\\components\TelegramComponent;
 use Yii;
 
 /**

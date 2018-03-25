@@ -3,10 +3,10 @@
 namespace app\components\Types;
 
 use yii\base\Model;
-use app\modules\Telegram\components\Types\From;
-use app\modules\Telegram\components\Types\Chat;
-use app\modules\Telegram\components\Types\Entities;
-use app\modules\Telegram\components\Types\Document;
+use app\components\Types\From;
+use app\components\Types\Chat;
+use app\components\Types\Entities;
+use app\components\Types\Document;
 
 class Message extends Model {
     public $data = [];
@@ -68,6 +68,6 @@ class Message extends Model {
     }
 
     private function getClassName($class) {
-        return "app\\modules\\Telegram\\components\\Types\\" . $class;
+        return "app\\components\\Types\\" . $class;
     }
 }
